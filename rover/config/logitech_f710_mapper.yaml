@@ -1,0 +1,105 @@
+# Logitech F710 Controller Mapping
+# axes: 0 Left Stick X, 1 Left Stick Y, 3 Right Stick X, 4 Right Stick Y, 6 DPAD X, 7 DPAD Y
+# buttons: 0 A, 1 B, 2 X, 3 Y, 4 LB, 5 RB, 6 BACK, 7 START
+
+# ===== AXES =====
+ls_x:
+  type: axis
+  index: 0
+  exclusion: [-0.1, 0.1]   # deadband
+  scale: 1.0
+  offset: 0.0
+
+ls_y:
+  type: axis
+  index: 1
+  exclusion: [-0.1, 0.1]
+  scale: 1.0 # pushing stick forward = +1.0
+  offset: 0.0
+
+lt_axis:
+  type: axis
+  index: 2
+  exclusion: [-0.1, 0.1]
+  scale: 1.0
+  offset: 0.0
+
+rs_x:
+  type: axis
+  index: 3
+  exclusion: [-0.1, 0.1]
+  scale: 1.0
+  offset: 0.0
+
+rs_y:
+  type: axis
+  index: 4
+  exclusion: [-0.1, 0.1]
+  scale: 1.0
+  offset: 0.0
+
+rt_axis:
+  type: axis
+  index: 5
+  exclusion: [-0.1, 0.1]
+  scale: 1.0
+  offset: 0.0
+
+dpad_x:
+  type: axis
+  index: 6
+  exclusion: [-0.5, 0.5]
+  scale: 1.0
+  offset: 0.0
+
+dpad_y:
+  type: axis
+  index: 7
+  exclusion: [-0.5, 0.5]
+  scale: 1.0
+  offset: 0.0
+
+# ===== BUTTONS =====
+btn_a:
+  type: button
+  index: 0
+  boolean: true
+  latch: true   # act as toggle
+
+btn_b:
+  type: button
+  index: 1
+  boolean: true
+  latch: true
+
+btn_x:
+  type: button
+  index: 2
+  boolean: true
+
+btn_y:
+  type: button
+  index: 3
+  boolean: true
+  latch: true
+
+btn_lb:
+  type: button
+  index: 4
+  boolean: true
+
+btn_rb:
+  type: button
+  index: 5
+  boolean: true
+
+btn_back:
+  type: button
+  index: 6
+  boolean: true
+  latch: true
+
+btn_start:
+  type: button
+  index: 7
+  boolean: true

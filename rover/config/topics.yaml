@@ -1,0 +1,28 @@
+# Command Velocity Topics Configuration
+
+base_cmd_vel:
+  type: Twist
+  topic: /cmd_vel/joystick
+  publish_multiple_halt: true
+
+  throttle:
+    # 0 means "no throttle input", coefficient stays at 1.0
+    lin_throttle_ctrl: 0
+    ang_throttle_ctrl: 0
+    lin_increment: 0.1
+    ang_increment: 0.1
+
+  data:
+    linear:
+      # forward/back with left stick up/down
+      x: ls_y
+      y: 0.0
+      z: 0.0
+    angular:
+      x: 0.0
+      y: 0.0
+      # turn with right stick left/right
+      z: rs_x
+
+  estop_button: btn_x
+  resume_button: btn_start
