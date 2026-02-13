@@ -14,7 +14,7 @@ ls_y:
   type: axis
   index: 1
   exclusion: [-0.1, 0.1]
-  scale: 1.0 # pushing stick forward = +1.0
+  scale: 0.1 # pushing stick forward = +0.1 m/s max
   offset: 0.0
 
 lt_axis:
@@ -28,7 +28,7 @@ rs_x:
   type: axis
   index: 3
   exclusion: [-0.1, 0.1]
-  scale: 1.0
+  scale: 0.3 # right stick left/right = +/-0.2 rad/s max
   offset: 0.0
 
 rs_y:

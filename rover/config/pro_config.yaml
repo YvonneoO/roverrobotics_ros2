@@ -11,7 +11,7 @@ roverrobotics_driver:
     # robot_info_request_topic:
     # robot_info_topic:
     robot_type: "pro"
-    device_port: "/dev/rover-pro"
+    device_port: "/dev/ttyUSB0"
     comm_type: "serial"
     speed_topic: "/cmd_vel"
     # estop_trigger_topic:
@@ -19,8 +19,8 @@ roverrobotics_driver:
     # trim_topic:
     # estop_state:
     control_mode: "INDEPENDENT_WHEEL" # Open loop = OPEN_LOOP | Closed loop = INDEPENDENT_WHEEL
-    linear_top_speed: 0.3
-    angular_top_speed: 0.4
+    linear_top_speed: 0.05
+    angular_top_speed: 0.05
     odom_topic: "/odometry/wheels"
     odom_frame_id: "odom"
     odom_child_frame_id: "base_link" # Set this to the base frame of the robot

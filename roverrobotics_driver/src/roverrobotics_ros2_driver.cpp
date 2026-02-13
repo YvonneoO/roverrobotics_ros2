@@ -244,12 +244,12 @@ RobotDriver::RobotDriver() : Node("roverrobotics", rclcpp::NodeOptions().use_int
 
 void RobotDriver::publish_robot_info() {
   // RCLCPP_INFO(get_logger(), "Updating Robot Info");
-  if (!robot_->is_connected()) {
-    RCLCPP_FATAL(
-        get_logger(),
-        "Did not receive any data from the robot or the data is stale. Check that the robot is connected to the computer and that permissions are set correctly.");
-    rclcpp::shutdown();
-  }
+  // if (!robot_->is_connected()) {
+  //   RCLCPP_FATAL(
+  //       get_logger(),
+  //       "Did not receive any data from the robot or the data is stale. Check that the robot is connected to the computer and that permissions are set correctly.");
+  //   rclcpp::shutdown();
+  // }
   robot_data_ = robot_->info_request();
   std_msgs::msg::Float32MultiArray robot_info;
   robot_info.data.clear();
@@ -264,12 +264,12 @@ void RobotDriver::publish_robot_info() {
 
 void RobotDriver::publish_robot_status() {
   // std::cerr << robot_->is_connected() << std::endl;
-  if (!robot_->is_connected()) {
-    RCLCPP_FATAL(
-        get_logger(),
-        "Did not receive any data from the robot or the data is stale. Check that the robot is connected to the computer and that permissions are set correctly.");
-    rclcpp::shutdown();
-  }
+  // if (!robot_->is_connected()) {
+  //   RCLCPP_FATAL(
+  //       get_logger(),
+  //       "Did not receive any data from the robot or the data is stale. Check that the robot is connected to the computer and that permissions are set correctly.");
+  //   rclcpp::shutdown();
+  // }
   // RCLCPP_INFO(get_logger(), "Updating Robot Status");
   robot_data_ = robot_->status_request();
   std_msgs::msg::Float32MultiArray robot_status;
@@ -329,12 +329,12 @@ void RobotDriver::publish_robot_status() {
 }
 
 void RobotDriver::update_odom() {
-  if (!robot_->is_connected()) {
-    RCLCPP_FATAL(
-        get_logger(),
-        "Did not receive any data from the robot or the data is stale. Check that the robot is connected to the computer and that permissions are set correctly.");
-    rclcpp::shutdown();
-  }
+  // if (!robot_->is_connected()) {
+  //   RCLCPP_FATAL(
+  //       get_logger(),
+  //       "Did not receive any data from the robot or the data is stale. Check that the robot is connected to the computer and that permissions are set correctly.");
+  //   rclcpp::shutdown();
+  // }
   robot_data_ = robot_->status_request();
   
   // RCLCPP_INFO(get_logger(), "Updating Robot Odom");
@@ -421,12 +421,12 @@ void RobotDriver::update_odom() {
 
 void RobotDriver::velocity_event_callback(
     geometry_msgs::msg::Twist::ConstSharedPtr msg) {
-  if (!robot_->is_connected()) {
-    RCLCPP_FATAL(
-        get_logger(),
-        "Did not receive any data from the robot or the data is stale. Check that the robot is connected to the computer and that permissions are set correctly.");
-    rclcpp::shutdown();
-  }
+  // if (!robot_->is_connected()) {
+  //   RCLCPP_FATAL(
+  //       get_logger(),
+  //       "Did not receive any data from the robot or the data is stale. Check that the robot is connected to the computer and that permissions are set correctly.");
+    // rclcpp::shutdown();
+  // }
   static double speeddata[3];
   speeddata[0] = msg->linear.x;
   speeddata[1] = msg->angular.z;
