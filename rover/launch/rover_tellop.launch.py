@@ -62,9 +62,9 @@ def generate_launch_description():
     return LaunchDescription([
         driver_config_arg,
         localization_config_arg,
-        camera_input_arg,
+        # camera_input_arg,
         controller_node,
         rover_driver_node,
         localization_node,
-        image_pub_node,
+        # image_pub_node,
     ])

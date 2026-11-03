@@ -20,6 +20,9 @@ class ImagePublisher(Node):
         self.image_pub = self.create_publisher(Image, '/camera/image_raw', 10)
         self.camera_info_pub = self.create_publisher(CameraInfo, '/camera/camera_info', 10)
 
+        self.publish_width = 1280
+        self.publish_height = 720
+
         self.cap = cv2.VideoCapture(self.args.input)
         self.cap.set(cv2.CAP_PROP_BUFFERSIZE, 1)
         self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, 2880)
@@ -38,14 +41,15 @@ class ImagePublisher(Node):
             f"  Device: /dev/video{self.args.input}\n"
             f"  Backend: {backend}\n"
             f"  Resolution: {self.actual_width}x{self.actual_height}\n"
-            f"  FPS: {self.fps}"
+            f"  FPS: {self.fps}\n"
+            f"  Publish Resolution: {self.publish_width}x{self.publish_height}\n"
         )
         self.get_logger().info(info_msg)
 
         self.camera_info = CameraInfo()
         self.camera_info.header.frame_id = "camera_frame"
-        self.camera_info.width = self.actual_width
-        self.camera_info.height = self.actual_height
+        self.camera_info.width = self.publish_width
+        self.camera_info.height = self.publish_height
 
         timer_period = 1.0 / self.fps if self.fps and self.fps > 0 else 0.033
         self.timer = self.create_timer(timer_period, self.publish_frame)
@@ -57,14 +61,15 @@ class ImagePublisher(Node):
                 self.get_logger().error("Failed to read frame from camera")
                 return
 
+            frame = cv2.resize(frame, (self.publish_width, self.publish_height))
             timestamp = self.get_clock().now().to_msg()
             ros_image = self.bridge.cv2_to_imgmsg(frame, encoding="bgr8")
             ros_image.header.stamp = timestamp
             ros_image.header.frame_id = "camera_frame"
             self.image_pub.publish(ros_image)
 
-            self.camera_info.header.stamp = timestamp
-            self.camera_info_pub.publish(self.camera_info)
+            # self.camera_info.header.stamp = timestamp
+            # self.camera_info_pub.publish(self.camera_info)
 
             if self.args.show:
                 cv2.imshow('video', frame)
@@ -73,7 +78,7 @@ class ImagePublisher(Node):
                     self.get_logger().info("ESC pressed, shutting down image publisher.")
                     rclpy.shutdown()
         except (ValueError, RuntimeError) as exc:
-            self.get_logger().error(f"Failed to publish image/camera_info: {exc}")
+            self.get_logger().error(f"Failed to publish image: {exc}")
             return
 
         self.capture_count += 1
